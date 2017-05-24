@@ -39,12 +39,12 @@
          }),  
   projection: 'EPSG:3857'  
 });
-var nightLayers = new ol.layer.Tile({
-      source: new ol.source.TileArcGISRest({
+ var nightLayers = new ol.layer.Tile({
+  source: new ol.source.TileArcGISRest({
       // url: 'http://192.168.71.49:6080/arcgis/rest/services/map/night/MapServer'
       url: 'http://60.191.115.34:6080/arcgis/rest/services/nightlight/night/MapServer'
     })
-  });
+});
  /***百度地图相关***/
  var projection = ol.proj.get("EPSG:3857");
  var resolutions = [];
@@ -137,37 +137,37 @@ var tencentMap_anno = new ol.layer.Tile({
   projection: 'EPSG:3857'  
 });
 var stamenLayer = new ol.layer.Tile({  
-        source: new ol.source.Stamen({  
+  source: new ol.source.Stamen({  
             layer: 'toner',//terrain
-        })  
-    });   
+          })  
+});   
 function loadXZQHVectorSource() {
-   var url = "http://61.130.148.100:6080/arcgis/rest/services/lanxi/lanxild/FeatureServer/0/query";
-    var data = {
-        f: 'json',
-        outFields: '*',
-        spatialRel: 'esriSpatialRelIntersects',
-        geometryType: 'esriGeometryEnvelope',
-        returnGeometry: true,
-        where: '1=1'
-    };
-    var esriJsonFormat = new ol.format.EsriJSON();
-    var vectorSource = new ol.source.Vector({strategy: ol.loadingstrategy.tile(new ol.tilegrid.XYZ({
-      tileSize: 512
-    }))});
-    $.ajax({
-      async:false,
-      url: url,
-      data: data,
-      dataType: 'jsonp',
-      success: function(response) {
-        if (response.error) {
-          HESCGIS.API.alert(response.error.message + '\n'
-              + response.error.details.join('\n'));
-        } else {
-          var features = esriJsonFormat.readFeatures(response);
-          for (var i in features) {
-            var feature = features[i];
+ var url = "http://61.130.148.100:6080/arcgis/rest/services/lanxi/lanxild/FeatureServer/0/query";
+ var data = {
+  f: 'json',
+  outFields: '*',
+  spatialRel: 'esriSpatialRelIntersects',
+  geometryType: 'esriGeometryEnvelope',
+  returnGeometry: true,
+  where: '1=1'
+};
+var esriJsonFormat = new ol.format.EsriJSON();
+var vectorSource = new ol.source.Vector({strategy: ol.loadingstrategy.tile(new ol.tilegrid.XYZ({
+  tileSize: 512
+}))});
+$.ajax({
+  async:false,
+  url: url,
+  data: data,
+  dataType: 'jsonp',
+  success: function(response) {
+    if (response.error) {
+      HESCGIS.API.alert(response.error.message + '\n'
+        + response.error.details.join('\n'));
+    } else {
+      var features = esriJsonFormat.readFeatures(response);
+      for (var i in features) {
+        var feature = features[i];
             //去除同一区域标题
             if (feature.getGeometry().getType()=='MultiPolygon'){
               var polygons = feature.getGeometry().getPolygons();
@@ -194,22 +194,22 @@ function loadXZQHVectorSource() {
             source: vectorSource,
             opacity: 0.6,
             style: regionStyleFunction
-            });
+          });
           map.addLayer(regionLayer);
         }
       }
     });
-  }
-  
+}
+
 /**
    * 网格图层首页样式函数
    */
-  function regionStyleFunction(feature, resolution) {
+   function regionStyleFunction(feature, resolution) {
     var style = new ol.style.Style({
       fill: new ol.style.Fill({
         color: 'rgba(40,53,69, 1)'
           //283545
-      }),
+        }),
       stroke: new ol.style.Stroke({
         color: '#27e8ff',
         width: 2
@@ -217,14 +217,14 @@ function loadXZQHVectorSource() {
       text: feature.get("isText") ? new ol.style.Text({
         text: feature.get("FNAME"),
 //        text: feature.get("JZ_Name"),
-        fill: new ol.style.Fill({
-          color: '#27e8ff'
-        }),
-        font: '18px 宋体',
-        stroke: new ol.style.Stroke({
-          color: '#27e8ff'
-        })
-      }) : null
+fill: new ol.style.Fill({
+  color: '#27e8ff'
+}),
+font: '18px 宋体',
+stroke: new ol.style.Stroke({
+  color: '#27e8ff'
+})
+}) : null
     });
     return [style];
   }
@@ -234,44 +234,38 @@ function loadXZQHVectorSource() {
  * @type {ol}
  */
  var format = 'image/png';
-       var untiled = new ol.layer.Image({
-        source: new ol.source.ImageWMS({
-          ratio: 1,
-          url: 'http://60.191.115.34:8080/geoserver/night/wms',
-          params: {'FORMAT': format,
-                   'VERSION': '1.1.1',  
-                STYLES: '',
-                LAYERS: 'night:dnb_land_ocean_ice',
-          }
-        })
-      });
-   var tiled = new ol.layer.Tile({
+ var untiled = new ol.layer.Image({
+  source: new ol.source.ImageWMS({
+    ratio: 1,
+    url: 'http://60.191.115.34:8080/geoserver/night/wms',
+    params: {'FORMAT': format,
+    'VERSION': '1.1.1',  
+    STYLES: '',
+    LAYERS: 'night:dnb_land_ocean_ice',
+  }
+})
+});
+ var tiled = new ol.layer.Tile({
         // visible: false,
         source: new ol.source.TileWMS({
           url: 'http://60.191.115.34:8080/geoserver/night/wms',
           params: {'FORMAT': format, 
-                   'VERSION': '1.1.1',
-                   tiled: true,
-                STYLES: '',
-                LAYERS: 'night:dnb_land_ocean_ice',
-          }
-        })
+          'VERSION': '1.1.1',
+          tiled: true,
+          STYLES: '',
+          LAYERS: 'night:dnb_land_ocean_ice',
+        }
+      })
       });
-var map = new ol.Map({
- target: 'map',
- layers: [gmap_satellite_layer,gmap_anno],
-  // layers: [tiled,gmap_anno],
- view: view,
- interactions: ol.interaction.defaults().extend([
-          new ol.interaction.DragRotate({
-             condition:ol.events.condition.shiftKeyOnly
-          })
-        ]),
-     logo:false
-     // logo:"img/dt.jpg"
+ var map = new ol.Map({
+   target: 'map',
+   layers: [gmap_satellite_layer,gmap_anno],
+   view: view
+   logo:false
+// logo:"img/dt.jpg"
    });
 
-var overviewMapControl = new ol.control.OverviewMap({
+ var overviewMapControl = new ol.control.OverviewMap({
   className: 'ol-overviewmap ol-custom-overviewmap',
   collapsed:false,
       // layers: [baidu_layer],//不写，则默认采用地图中的图层作为鹰眼
@@ -279,12 +273,12 @@ var overviewMapControl = new ol.control.OverviewMap({
       collapseLabel:"↙",
       label:"↗"
     });
-var mousePosition=new ol.control.MousePosition({
+ var mousePosition=new ol.control.MousePosition({
   coordinateFormat: ol.coordinate.createStringXY(6),//显示6位小数点
   projection: 'EPSG:4326'
 })   
 
-var zoomToExtent=new ol.control.ZoomToExtent({
+ var zoomToExtent=new ol.control.ZoomToExtent({
   label:"HZ",
   tipLabel:"回到杭州",
   extent: [
@@ -294,7 +288,7 @@ var zoomToExtent=new ol.control.ZoomToExtent({
 }) ;
 /*
 测量控件
- */
+*/
 var MeasureTool = new ol.control.MeasureTool({
   sphereradius : 6378137,//sphereradius
 });
