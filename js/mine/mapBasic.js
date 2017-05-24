@@ -260,7 +260,7 @@ stroke: new ol.style.Stroke({
  var map = new ol.Map({
    target: 'map',
    layers: [gmap_satellite_layer,gmap_anno],
-   view: view
+   view: view,
    logo:false
 // logo:"img/dt.jpg"
    });
