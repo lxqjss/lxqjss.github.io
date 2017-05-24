@@ -12,7 +12,7 @@
  var gmap_satellite_layer = new ol.layer.Tile({
   title: "仅卫星图",
   source: new ol.source.XYZ({
-    url: 'http://mt1.google.cn/maps/vt?lyrs=s%40721&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}'
+    url: 'https://mt1.google.cn/maps/vt?lyrs=s%40721&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}'
   })
 });
  var gmap_satellite_layer_anno= new ol.layer.Tile({
@@ -25,10 +25,10 @@
   title: "仅文字",
   source: new ol.source.XYZ({
     urls: [
-    "http://mt0.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
-    "http://mt1.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
-    "http://mt2.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
-    "http://mt3.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil"
+    "https://mt0.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
+    "https://mt1.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
+    "https://mt2.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil",
+    "https://mt3.google.cn/vt/imgtp=png32&lyrs=h@365000000&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}&s=Galil"
     ]})
 });
  
@@ -42,7 +42,7 @@
 var nightLayers = new ol.layer.Tile({
       source: new ol.source.TileArcGISRest({
       // url: 'http://192.168.71.49:6080/arcgis/rest/services/map/night/MapServer'
-      url: 'http://60.191.115.34:6080/arcgis/rest/services/nightlight/night/MapServer'
+      url: 'https://60.191.115.34:6080/arcgis/rest/services/nightlight/night/MapServer'
     })
   });
  /***百度地图相关***/
@@ -106,7 +106,7 @@ var lanxi_jproad_layer = new ol.layer.Tile({
 });  
 var gaodeMapLayer = new ol.layer.Tile({  
   source: new ol.source.XYZ({  
-            url:'http://webrd03.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8'//高德地图在线  
+            url:'https://webrd03.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8'//高德地图在线  
           }),  
   projection: 'EPSG:3857'  
 });  
