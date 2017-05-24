@@ -1,0 +1,54 @@
+#map .ol-zoom-extent{
+  left:95%;
+  top:2em;
+}
+#map .ol-zoom{
+  left:95%;
+  top:4em;
+}
+#map .ol-mouse-position{
+  /*top:97%;*/
+  color:white;
+  font-size: 20px;
+  left: 40%;
+}
+#map .ol-scale-line {
+  left:200px;
+}
+#map .ol-zoom .ol-zoom-out {
+  margin-top: 204px;
+}
+#map .ol-zoomslider {
+  background-color: transparent;
+  top: 5.95em;
+  left:95%;
+}
+
+#map .ol-touch .ol-zoom .ol-zoom-out {
+  margin-top: 212px;
+}
+#map .ol-touch .ol-zoomslider {
+  top: 2.75em;
+}
+
+#map .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+#map .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+  top: 3px;
+}
+
+#map .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+#map .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+  top: 232px;
+}
+
+/*鹰眼设置*/
+.ol-custom-overviewmap .ol-overviewmap-map {
+  border: none;
+  width: 180px;
+  height: 120px;
+}
+.ol-custom-overviewmap .ol-overviewmap-box {
+  border: 2px dotted red;
+}
+
+

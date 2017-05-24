@@ -1,0 +1,117 @@
+.gmap_switch{
+	/*bottom: auto; */
+	left: 40px;
+	top: 20px;
+	white-space: nowrap;
+	cursor: pointer; 
+	position: absolute;
+	z-index: 10;
+}
+.gmap_switch_map,.gmap_switch_satellite{
+	float: left;
+}
+.gmap_switch_map div{
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	/*color: rgb(86, 86, 86); */
+	/*font-family: Roboto, Arial, sans-serif; */
+	font-family: 微软雅黑;
+	font-weight: normal; 
+	-webkit-user-select: none; 
+	font-size: 11px;
+	padding: 8px;
+	border-bottom-left-radius: 2px;
+	border-top-left-radius: 2px; 
+	-webkit-background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; 
+	min-width: 24px; background-color: rgb(255, 255, 255); 
+	background-clip: padding-box;
+}
+.gmap_switch_satellite>div{
+	direction: ltr;
+	overflow: hidden;
+	text-align: center; 
+	position: relative; 
+	/*color: rgb(0, 0, 0);*/
+	/*font-family: Roboto, Arial, sans-serif; */
+	font-family: 微软雅黑;
+	font-weight: bold; 
+	-webkit-user-select: none;
+	font-size: 11px; padding: 8px; 
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px; 
+	-webkit-background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left-width: 0px;
+	min-width: 48px; 
+	background-color: rgb(255, 255, 255);
+	background-clip: padding-box;
+}
+#gmap_switch_anno{
+	z-index: -1; 
+	padding: 2px; 
+	border-bottom-left-radius: 2px; 
+	border-bottom-right-radius: 2px; 
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; 
+	position: absolute; 
+	right: 0px; 
+	top: 30px; 
+	text-align: left; 
+	display: none; 
+	background-color: white;
+}
+
+#gmap_switch_anno>div{
+	color: rgb(0, 0, 0); 
+	/*font-family: Roboto, Arial, sans-serif; */
+	font-family: 微软雅黑;
+	font-weight: normal; 
+	-webkit-user-select: none; 
+	font-size: 11px; 
+	padding: 6px 8px 6px 6px; 
+	direction: ltr; 
+	text-align: left; 
+	white-space: nowrap; 
+	background-color: rgb(255, 255, 255);
+}
+#gmap_switch_anno>div>span{
+	box-sizing: border-box; 
+	position: relative; 
+	line-height: 0; 
+	font-size: 0px; 
+	margin: 0px 5px 0px 0px; 
+	display: inline-block; 
+	border: 1px solid rgb(198, 198, 198); 
+	border-radius: 1px; 
+	width: 13px; 
+	height: 13px; 
+	vertical-align: middle; 
+	background-color: rgb(255, 255, 255);
+}
+#gmap_switch_anno_selected{
+	position: absolute; 
+	left: 1px; 
+	top: -2px; 
+	width: 13px; 
+	height: 11px; 
+	overflow: hidden; 
+	display: none;
+}
+#gmap_switch_anno_selected>img{
+	position: absolute; 
+	left: -52px; 
+	top: -44px; 
+	-webkit-user-select: none; 
+	border: 0px; 
+	padding: 0px; 
+	margin: 0px; 
+	max-width: none; 
+	width: 68px; 
+	height: 67px;
+}
+#gmap_switch_anno label{
+	vertical-align: middle; 
+	cursor: pointer;
+}

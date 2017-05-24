@@ -1,0 +1,10 @@
+ .flyToHZ{
+  border:none;
+  background-image: url("../img/DataServer.png");
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  position:fixed;
+  right:30px; 
+  bottom:20px;
+}

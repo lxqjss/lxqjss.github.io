@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<title>googleMap</title>
+  <meta http-equiv="Content-Type" content ="text/html" charset="UTF-8"/>
+  <link rel="icon" href="img/dt.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="img/dt.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" href="css/bootstrap-3.3.5.css" type="text/css" />
+  <link rel="stylesheet" href="css/ol.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="css/searchInput.css" type="text/css" /> -->
+  <link rel="stylesheet" href="css/mapCustomize.css" type="text/css" />
+  <link rel="stylesheet" href="css/mapChange.css" type="text/css" />
+  <link rel="stylesheet" href="css/measuretool.css" type="text/css" />
+</head>
+<style type="text/css">
+	html, body {
+   overflow: hidden;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   background-color:#b5d0d0;
+ }
+ #map{
+  height:100%;
+  width: 100%;
+}
+</style>
+<body>
+
+<!--[if lt IE 9]>
+    <div class="text-center text-warning">当前浏览器版本过低，部分功能无法使用或显示异常。我们建议您使用IE9以上版本的Internet Explorer，或使用Chrome、Firefox等主流浏览器。</div>
+    <![endif]-->
+    <div id="map" class="map"></div>
+  <!-- <div id="searchdiv">
+    <form action="https://www.baidu.com/s" target="_blank" method="get">
+      <input type="text" name="wd" class="search-input-text" placeholder="请输入..."/>
+      <input type="submit" class="search-input-button" value="" />
+    </form>
+  </div>-->
+
+  <div id="mapchageDiv" class="btn-group">
+    <button id="mapchange_map" class="btn btn-default" type="button">地图</button>
+    <div id="satelliteDiv" class="btn-group">
+      <button id="mapchange_satellite" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">卫星图像<span class="caret"></span></button>
+      <ul class="dropdown-menu">
+       <div class="checkbox">
+        <label>
+          <input type="checkbox" id="checkboxAnno" value="" checked>
+          地名
+        </label>
+      </div>
+      <li class="divider"></li>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="RadiosNormal" value="normal" checked >
+          普通影像
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="RadiosNight" value="night" >
+          夜间灯光
+        </label>
+      </div>
+    </ul>
+  </div>
+</div>
+</body>
+<!-- 用于获取浏览器ip -->
+<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script src="js/ol-debug.js"></script>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/mine/bootstrap-3.3.5.js"></script>
+<script src="js/mine/coordtransform.js"></script>
+<script src="js/mine/measuretool.js"></script>
+<script src="js/mine/mapBasic.js"></script>
+<script src="js/mine/mapChange.js"></script>
+<script src="js/mine/getIpLocation.js"></script>
+<!-- <script src="js/mine/searchPoi.js"></script> -->
+</html>

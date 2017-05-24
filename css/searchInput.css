@@ -1,0 +1,32 @@
+form{
+background-color:white;
+}
+.search-input-button{
+	border:none;
+	background-image: url("../img/GeoprocessingTool48.png");
+	width: 48px;
+	height: 48px;
+	margin-top:2px;
+	margin-right: 2px;
+	cursor: pointer;
+}
+.search-input-text{
+	border:none;
+	width:300px;
+	height: 48px;
+	float:left;
+	line-height: 48px;
+	outline: none;
+	font-size: 20px;
+	font-family: 微软雅黑;
+	color:gray;
+	word-spacing: 5px;
+	letter-spacing: 0.1em;
+	text-indent: 0.5em;
+}
+#searchdiv{
+	position:absolute;
+	top:30px;
+	left: 40px;
+	
+}
