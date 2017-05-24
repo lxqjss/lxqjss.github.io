@@ -42,7 +42,7 @@
 var nightLayers = new ol.layer.Tile({
       source: new ol.source.TileArcGISRest({
       // url: 'http://192.168.71.49:6080/arcgis/rest/services/map/night/MapServer'
-      url: 'https://60.191.115.34:6080/arcgis/rest/services/nightlight/night/MapServer'
+      url: 'http://60.191.115.34:6080/arcgis/rest/services/nightlight/night/MapServer'
     })
   });
  /***百度地图相关***/
