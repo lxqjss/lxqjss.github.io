@@ -45,8 +45,8 @@
                var longitude =position.coords.longitude;
                //纬度
                var latitude = position.coords.latitude;
-               alert(longitude+","+latitude);
-               
+               // alert(longitude+","+latitude);
+               map.setCenter(new AMap.LngLat(longitude,latitude));
              }
              
              
