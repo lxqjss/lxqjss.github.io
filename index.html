@@ -32,6 +32,8 @@
     <div class="text-center text-warning">当前浏览器版本过低，部分功能无法使用或显示异常。我们建议您使用IE9以上版本的Internet Explorer，或使用Chrome、Firefox等主流浏览器。</div>
     <![endif]-->
     <div id="map" class="map"></div>
+    <!-- 用于定位的高德控件 -->
+    <div id="gaodemap" style="display: none;"></div> 
   <!-- <div id="searchdiv">
     <form action="https://www.baidu.com/s" target="_blank" method="get">
       <input type="text" name="wd" class="search-input-text" placeholder="请输入..."/>
@@ -68,7 +70,8 @@
 </div>
 </body>
 <!-- 用于获取浏览器ip -->
-<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+<!-- <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=fe7500f9bcdab914ed3d65664b287e43"></script>
 <script src="js/ol-debug.js"></script>
 <script src="js/jquery-2.1.3.js"></script>
 <script src="js/mine/bootstrap-3.3.5.js"></script>
