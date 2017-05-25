@@ -19,35 +19,3 @@ $.ajax({
 	}
 });
 
-var options={
-  enableHighAccuracy:true, //是否要求高精度的地理信息，默认为false
-  maximumAge:1000 //应用程序的缓存时间
-}
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
-}
-else {
-  console.log("浏览器不支持!");
-}       
-function onSuccess(position){
-   //返回用户位置
-   var longitude =position.coords.longitude;
-   var latitude = position.coords.latitude;
-   map.getView().setCenter(longitude,latitude);
- }
-function onError(error){
-	switch(error.code){
-	  case error.PERMISSION_DENIED:
-	  console.log("用户拒绝对获取地理位置的请求");
-	  break;
-	  case error.POSITION_UNAVAILABLE:
-	  console.log("位置信息是不可用的");
-	  break;
-	  case error.TIMEOUT:
-	  console.log("请求用户地理位置超时");
-	  break;
-	  case error.UNKNOWN_ERROR:
-	  console.log("未知错误");
-	  break;
-	}
-}
