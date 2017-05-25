@@ -22,20 +22,18 @@ function satelliteFunction(){
 	if($('#checkboxAnno').is(':checked')){//地名勾选
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
-			map.addLayer(locationLayer);
 		}else if($('#RadiosNight').is(':checked')){
 			map.addLayer(nightLayers);
-			map.addLayer(locationLayer);
 		}
 		map.addLayer(gmap_anno);
+		map.addLayer(locationLayer);
 	}else{//地名不勾选
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
-			map.addLayer(locationLayer);
 		}else if($('#RadiosNight').is(':checked')){
 			map.addLayer(nightLayers);
-			map.addLayer(locationLayer);
 		}
+		map.addLayer(locationLayer);
 	}
 }
 function flyToHZ(zoom){
