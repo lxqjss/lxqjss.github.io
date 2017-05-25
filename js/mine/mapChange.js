@@ -1,6 +1,7 @@
 $("#mapchange_map").on('click',function(){
 	map.getLayers().clear();
 	map.addLayer(gaodeMapLayer);
+	map.addLayer(locationLayer);
 	$(".ol-mouse-position").css('color','black');//设置下方坐标提示信息的颜色
 });
 $("#mapchange_satellite").on('click',satelliteFunction);
@@ -21,17 +22,19 @@ function satelliteFunction(){
 	if($('#checkboxAnno').is(':checked')){//地名勾选
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
+			map.addLayer(locationLayer);
 		}else if($('#RadiosNight').is(':checked')){
 			map.addLayer(nightLayers);
-			// map.addLayer(tiled);
+			map.addLayer(locationLayer);
 		}
 		map.addLayer(gmap_anno);
 	}else{//地名不勾选
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
+			map.addLayer(locationLayer);
 		}else if($('#RadiosNight').is(':checked')){
 			map.addLayer(nightLayers);
-			// map.addLayer(tiled);
+			map.addLayer(locationLayer);
 		}
 	}
 }

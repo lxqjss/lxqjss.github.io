@@ -22,6 +22,7 @@
 /**
  * 采用高德精准定位方式
  */
+var locationLayer;
 var gaodemap = new AMap.Map('gaodemap', {
 	resizeEnable: true
 });
@@ -65,7 +66,7 @@ function addlocationico(locationX,locationY){
    var source = new ol.source.Vector({  
     features:[locationFeatrue]  
 	});  
-   var locationLayer = new ol.layer.Vector({  
+   locationLayer = new ol.layer.Vector({  
        source: source  
 	});  
    map.addLayer(locationLayer);
