@@ -4,7 +4,9 @@
 
 #### 底图采用如下:
 - 谷歌中国提供的最新影像数据
+![](/img/normal.png)
 - arcgis发布的nasa夜间卫星影像
+![](/img/nightlight.png)
 - 高德普通地图
 
 #### 实现功能点
