@@ -45,6 +45,7 @@ function onComplete(data) {
   if(os.isAndroid || os.isPhone){//手机端访问时对坐标进行偏移
     	$.ajax({
     	type : "get",
+       async:false,//false代表只有在等待ajax执行完毕后才执行后方设置坐标代码
     	 url : "https://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
     	 success:function(output){
     	 	gaodeX = output.locations.split(",")[0].substring(0,10);
