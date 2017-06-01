@@ -45,7 +45,7 @@ function onComplete(data) {
   if(!IsPC()){//手机端访问时对坐标进行偏移
     	$.ajax({
     	type : "get",
-    	 url : "http://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
+    	 url : "https://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
     	 success:function(output){
     	 	gaodeX = output.locations.split(",")[0].substring(0,10);
     	 	gaodeY = output.locations.split(",")[1].substring(0,9);
