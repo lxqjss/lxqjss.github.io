@@ -40,18 +40,21 @@ gaodemap.plugin('AMap.Geolocation', function() {
         AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
     });
 function onComplete(data) {
-	var gaodeX,gaodeY;
-	$.ajax({
-	type : "get",
-	 url : "http://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
-	 success:function(output){
-	 	gaodeX = output.locations.split(",")[0].substring(0,10);
-	 	gaodeY = output.locations.split(",")[1].substring(0,9);
-		map.getView().setCenter(ol.proj.transform([Number(gaodeX),Number(gaodeY)], 'EPSG:4326', 'EPSG:3857'));
-		map.getView().setZoom(12);
-		addlocationico(Number(gaodeX),Number(gaodeY));
-	}
-});
+	var gaodeX = data.position.getLng();
+  var gaodeY = data.position.getLat();
+  if(!IsPC()){//手机端访问时对坐标进行偏移
+    	$.ajax({
+    	type : "get",
+    	 url : "http://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
+    	 success:function(output){
+    	 	gaodeX = output.locations.split(",")[0].substring(0,10);
+    	 	gaodeY = output.locations.split(",")[1].substring(0,9);
+    	}
+    });
+  }
+  map.getView().setCenter(ol.proj.transform([Number(gaodeX),Number(gaodeY)], 'EPSG:4326', 'EPSG:3857'));
+  map.getView().setZoom(12);
+  addlocationico(Number(gaodeX),Number(gaodeY));
 }
 function onError(data) {
 	console.log("error");
@@ -79,4 +82,21 @@ function addlocationico(locationX,locationY){
        source: source  
 	});  
    map.addLayer(locationLayer);
+}
+/**
+ * [IsPC 用于判断pc或手机端访问]
+ */
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
 }
