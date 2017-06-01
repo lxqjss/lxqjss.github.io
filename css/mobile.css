@@ -1,0 +1,26 @@
+.ol-custom-overviewmap{
+	display: none;
+}
+
+#map .ol-scale-line {
+	left:20px;
+}
+
+#map .ol-mouse-position{
+	display: none;
+}
+#map .ol-zoom-extent{
+	display: none;
+}
+#map .ol-zoom{
+	display: none;
+}
+#map .ol-zoomslider {
+	display: none;
+}
+#mapchageDiv{
+	display: none;
+}
+.MeasureTool{
+	display: none;
+}
