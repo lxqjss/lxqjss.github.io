@@ -1,7 +1,7 @@
 //最终根据客户访问的ip地址确定当前地图范围
 // var ip="60.191.114.2";//默认杭州
 // ip = returnCitySN["cip"];//搜狐服务获取ip
-// var lxqjssKey="fe7500f9bcdab914ed3d65664b287e43";//高德key
+var lxqjssKey="fe7500f9bcdab914ed3d65664b287e43";//高德key
 // var gaodeUrl="https://restapi.amap.com/v3/ip?ip="+ip+"&key="+lxqjssKey;
 // var customExtent;
 
@@ -40,9 +40,18 @@ gaodemap.plugin('AMap.Geolocation', function() {
         AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
     });
 function onComplete(data) {
-	map.getView().setCenter(ol.proj.transform([data.position.getLng(), data.position.getLat()], 'EPSG:4326', 'EPSG:3857'));
-	map.getView().setZoom(12);
-	addlocationico(data.position.getLng(), data.position.getLat());
+	var gaodeX,gaodeY;
+	$.ajax({
+	type : "get",
+	 url : "http://restapi.amap.com/v3/assistant/coordinate/convert?key="+lxqjssKey+"&locations="+data.position.getLng()+"," +data.position.getLat()+"&coordsys=gps",//发送请求地址
+	 success:function(output){
+	 	gaodeX = output.locations.split(",")[0].substring(0,10);
+	 	gaodeY = output.locations.split(",")[1].substring(0,9);
+		map.getView().setCenter(ol.proj.transform([Number(gaodeX),Number(gaodeY)], 'EPSG:4326', 'EPSG:3857'));
+		map.getView().setZoom(12);
+		addlocationico(Number(gaodeX),Number(gaodeY));
+	}
+});
 }
 function onError(data) {
 	console.log("error");
