@@ -25,10 +25,10 @@
   /*left:95%;*/
 }
 #map .ol-touch .ol-zoom{
-  top:80%;
+  top:70%;
 }
 #map .ol-touch .ol-zoom .ol-zoom-out {
-  margin-top: 5px;
+  margin-top: 50px;
 }
 #map .ol-touch .ol-zoomslider {
   /*top: 2.75em;*/
