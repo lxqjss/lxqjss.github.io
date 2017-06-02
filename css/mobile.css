@@ -13,10 +13,11 @@
 	display: none;
 }
 #map .ol-zoom{
-	display: none;
+	/*display: none;*/
+	/*top: 80%;*/
 }
 #map .ol-zoomslider {
-	display: none;
+	/*display: none;*/
 }
 #mapchageDiv{
 	display: none;

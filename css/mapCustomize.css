@@ -1,9 +1,9 @@
 #map .ol-zoom-extent{
-  left:95%;
+  /*left:95%;*/
   top:2em;
 }
 #map .ol-zoom{
-  left:95%;
+  /*left:95%;*/
   top:4em;
 }
 #map .ol-mouse-position{
@@ -21,14 +21,19 @@
 #map .ol-zoomslider {
   background-color: transparent;
   top: 5.95em;
-  left:95%;
+  right: 0.8em;
+  /*left:95%;*/
 }
-
+#map .ol-touch .ol-zoom{
+  top:80%;
+}
 #map .ol-touch .ol-zoom .ol-zoom-out {
-  margin-top: 212px;
+  margin-top: 5px;
 }
 #map .ol-touch .ol-zoomslider {
-  top: 2.75em;
+  /*top: 2.75em;*/
+  /*top: 5.95em;*/
+  display: none;
 }
 
 #map .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
