@@ -23,7 +23,10 @@ var lxqjssKey="fe7500f9bcdab914ed3d65664b287e43";//高德key
  * 采用高德精准定位方式
  */
 var locationLayer;
+var gaodeX = 0;
+var gaodeY = 0;
 $('body').append('<div id="gaodemap" style="display: none;"></div> ');
+$('body').append('<div class="positionIcon"></div>');
 var gaodemap = new AMap.Map('gaodemap', {
 	resizeEnable: true
 });
@@ -41,8 +44,8 @@ gaodemap.plugin('AMap.Geolocation', function() {
         AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
     });
 function onComplete(data) {
-	var gaodeX = data.position.getLng();
-  var gaodeY = data.position.getLat();
+	gaodeX = data.position.getLng();
+  gaodeY = data.position.getLat();
   if(os.isAndroid || os.isPhone){//手机端访问时对坐标进行偏移
     	$.ajax({
     	type : "get",
@@ -55,7 +58,7 @@ function onComplete(data) {
     });
   }
   map.getView().setCenter(ol.proj.transform([Number(gaodeX),Number(gaodeY)], 'EPSG:4326', 'EPSG:3857'));
-  map.getView().setZoom(12);
+  map.getView().setZoom(16);
   addlocationico(Number(gaodeX),Number(gaodeY));
 }
 function onError(data) {
@@ -102,3 +105,25 @@ var os = function() {
           isPc : isPc  
      };  
 }();  
+
+$(".positionIcon").click(function(){
+  var location = ol.proj.transform([Number(gaodeX),Number(gaodeY)], 'EPSG:4326', 'EPSG:3857');
+  flyToLocation(16,location);
+})
+function flyToLocation(zoom,location){
+  var duration = 2000;
+  var start = +new Date();
+  var pan = ol.animation.pan({
+    duration: duration,
+    source: /** @type {ol.Coordinate} */ (view.getCenter()),
+    start: start
+  });
+  var bounce = ol.animation.bounce({
+    duration: duration,
+    resolution: 4 * view.getResolution(),
+    start: start
+  });
+  map.beforeRender(pan, bounce);
+  view.setCenter(location);
+  view.setZoom(zoom);
+};

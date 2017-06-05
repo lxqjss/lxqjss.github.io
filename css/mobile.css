@@ -3,7 +3,7 @@
 }
 
 #map .ol-scale-line {
-	left:20px;
+	left:0px;
 }
 
 #map .ol-mouse-position{
@@ -24,4 +24,14 @@
 }
 .MeasureTool{
 	display: none;
+}
+
+.positionIcon{
+	cursor: pointer;
+	position:absolute;
+	left: 5px; 
+	bottom:35px;
+	width: 32px;
+	height: 32px;
+	background-image: url("../img/locationIco32.png");
 }
