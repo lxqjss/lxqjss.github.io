@@ -1,3 +1,29 @@
+$('body').append('<div id="mapchageDiv" class="btn-group">'+
+    '<button id="mapchange_map" class="btn btn-default" type="button">地图</button>'+
+    '<div id="satelliteDiv" class="btn-group">'+
+      '<button id="mapchange_satellite" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">卫星图像<span class="caret"></span></button>'+
+      '<ul class="dropdown-menu">'+
+       '<div class="checkbox">'+
+        '<label><input type="checkbox" id="checkboxAnno" value="" checked>地名</label>'+
+      '</div>'+
+      '<li class="divider"></li>'+
+     ' <div class="radio">'+
+        '<label>'+
+          '<input type="radio" name="optionsRadios" id="RadiosNormal" value="normal" checked >'+
+          '普通影像'+
+        '</label>'+
+      '</div>'+
+      '<div class="radio">'+
+        '<label>'+
+          '<input type="radio" name="optionsRadios" id="RadiosNight" value="night" >'+
+          '夜间灯光'+
+        '</label>'+
+      '</div>'+
+    '</ul>'+
+  '</div>'+
+'</div>');
+
+
 $("#mapchange_map").on('click',function(){
 	map.getLayers().clear();
 	map.addLayer(gaodeMapLayer);

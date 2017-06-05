@@ -23,6 +23,7 @@ var lxqjssKey="fe7500f9bcdab914ed3d65664b287e43";//高德key
  * 采用高德精准定位方式
  */
 var locationLayer;
+$('body').append('<div id="gaodemap" style="display: none;"></div> ');
 var gaodemap = new AMap.Map('gaodemap', {
 	resizeEnable: true
 });
