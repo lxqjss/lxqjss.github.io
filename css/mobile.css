@@ -36,6 +36,7 @@
 	background-image: url("../img/locationIco32.png");
 }
 .changeto_googleMap{
+	cursor: pointer;
 	position:absolute;
 	right: 5px; 
 	top:20px;
@@ -44,6 +45,7 @@
 	background-image: url("../img/googleMap.png");
 }
 .changeto_gaodeMap{
+	cursor: pointer;
 	position:absolute;
 	right: 5px; 
 	top:20px;
@@ -52,6 +54,7 @@
 	background-image: url("../img/gaodeMap.png");
 }
 .changeto_googleMap_anno{
+	cursor: pointer;
 	position:absolute;
 	right: 5px; 
 	top:20px;
