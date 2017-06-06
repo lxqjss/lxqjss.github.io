@@ -35,3 +35,27 @@
 	height: 32px;
 	background-image: url("../img/locationIco32.png");
 }
+.changeto_googleMap{
+	position:absolute;
+	right: 5px; 
+	top:20px;
+	width: 32px;
+	height: 32px;
+	background-image: url("../img/googleMap.png");
+}
+.changeto_gaodeMap{
+	position:absolute;
+	right: 5px; 
+	top:20px;
+	width: 32px;
+	height: 32px;
+	background-image: url("../img/gaodeMap.png");
+}
+.changeto_googleMap_anno{
+	position:absolute;
+	right: 5px; 
+	top:20px;
+	width: 32px;
+	height: 32px;
+	background-image: url("../img/googleMap_anno.png");
+}

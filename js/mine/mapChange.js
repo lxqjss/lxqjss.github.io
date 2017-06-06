@@ -24,6 +24,7 @@ $('body').append('<div id="mapchageDiv" class="btn-group">'+
 '</div>');
 
 
+
 $("#mapchange_map").on('click',function(){
 	map.getLayers().clear();
 	map.addLayer(gaodeMapLayer);
@@ -79,3 +80,34 @@ function flyToHZ(zoom){
   view.setCenter(hangzhou);
   view.setZoom(zoom);
 };
+
+
+//手机端切换功能下方
+//
+//-----------------------------------------
+
+//手机端切换按钮
+$('body').append('<div class="changeto_googleMap"></div>');
+
+ $('body').on('click','.changeto_googleMap',function(){
+  map.getLayers().clear();
+  map.addLayer(gmap_satellite_layer);
+  map.addLayer(locationLayer);
+  $(this).addClass("changeto_gaodeMap");
+  $(this).removeClass("changeto_googleMap");
+});
+ $('body').on('click','.changeto_gaodeMap',function(){
+  map.getLayers().clear();
+  map.addLayer(gaodeMapLayer);
+  map.addLayer(locationLayer);
+  $(this).addClass("changeto_googleMap_anno");
+  $(this).removeClass("changeto_gaodeMap");
+});
+ $('body').on('click','.changeto_googleMap_anno',function(){
+  map.getLayers().clear();
+  map.addLayer(gmap_satellite_layer);
+  map.addLayer(gmap_anno);
+  map.addLayer(locationLayer);
+  $(this).addClass("changeto_googleMap");
+  $(this).removeClass("changeto_googleMap_anno");
+});
