@@ -92,14 +92,14 @@ $('body').append('<div class="changeto_googleMap"></div>');
  $('body').on('click','.changeto_googleMap',function(){
   map.getLayers().clear();
   map.addLayer(gmap_satellite_layer);
-  map.addLayer(locationLayer);
+  // map.addLayer(locationLayer);
   $(this).addClass("changeto_gaodeMap");
   $(this).removeClass("changeto_googleMap");
 });
  $('body').on('click','.changeto_gaodeMap',function(){
   map.getLayers().clear();
   map.addLayer(gaodeMapLayer);
-  map.addLayer(locationLayer);
+  // map.addLayer(locationLayer);
   $(this).addClass("changeto_googleMap_anno");
   $(this).removeClass("changeto_gaodeMap");
 });
@@ -107,7 +107,7 @@ $('body').append('<div class="changeto_googleMap"></div>');
   map.getLayers().clear();
   map.addLayer(gmap_satellite_layer);
   map.addLayer(gmap_anno);
-  map.addLayer(locationLayer);
+  // map.addLayer(locationLayer);
   $(this).addClass("changeto_googleMap");
   $(this).removeClass("changeto_googleMap_anno");
 });
