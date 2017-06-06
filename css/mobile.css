@@ -37,7 +37,7 @@
 }
 .changeto_googleMap{
 	position:absolute;
-	right: 50px; 
+	right: 5px; 
 	top:20px;
 	width: 32px;
 	height: 32px;
@@ -45,7 +45,7 @@
 }
 .changeto_gaodeMap{
 	position:absolute;
-	right: 50px; 
+	right: 5px; 
 	top:20px;
 	width: 32px;
 	height: 32px;
@@ -53,7 +53,7 @@
 }
 .changeto_googleMap_anno{
 	position:absolute;
-	right: 50px; 
+	right: 5px; 
 	top:20px;
 	width: 32px;
 	height: 32px;
