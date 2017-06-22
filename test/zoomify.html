@@ -1,0 +1,42 @@
+<!-- 用于加载高清大图到地图展示，例如展示卫星图tif -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zoomify</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var imgWidth = 9911;
+      var imgHeight = 6100;
+
+      var source = new ol.source.Zoomify({
+        url: 'http://vips.vtech.fr/cgi-bin/iipsrv.fcgi?zoomify=' +
+            '/mnt/MD1/AD00/plan_CHU-4HD-01/FOND.TIF/',
+        size: [imgWidth, imgHeight],
+        crossOrigin: 'anonymous'
+      });
+      var extent = [0, -imgHeight, imgWidth, 0];
+
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: source
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          // adjust zoom levels to those provided by the source
+          resolutions: source.getTileGrid().getResolutions(),
+          // constrain the center: center cannot be set outside this extent
+          extent: extent
+        })
+      });
+      map.getView().fit(extent);
+    </script>
+  </body>
+</html>

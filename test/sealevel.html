@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WMTS Tile Transitions</title>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+</head>
+<body>
+  <div id="map" class="map"></div>
+  <label>
+    Sea-level
+    <input id="slider" type="range" value="10" max="100" min="-1">
+  </label>
+  <span id="theinfo"></span>
+  <script>
+      // create the WMTS tile grid in the google projection
+      var projection = ol.proj.get('EPSG:3857');
+      var tileSizePixels = 256;
+      var tileSizeMtrs = ol.extent.getWidth(projection.getExtent()) / tileSizePixels;
+      var matrixIds = [];
+      var resolutions = [];
+      for (var i = 0; i <= 14; i++) {
+        matrixIds[i] = i;
+        resolutions[i] = tileSizeMtrs / Math.pow(2, i);
+      }
+      var tileGrid = new ol.tilegrid.WMTS({
+        origin: ol.extent.getTopLeft(projection.getExtent()),
+        resolutions: resolutions,
+        matrixIds: matrixIds
+      });
+
+      var scalgoToken = 'CC5BF28A7D96B320C7DFBFD1236B5BEB';
+
+      var wmtsSource = new ol.source.WMTS({
+        url: 'http://ts2.scalgo.com/olpatch/wmts?token=' + scalgoToken,
+        layer: 'SRTM_4_1:SRTM_4_1_flooded_sealevels',
+        format: 'image/png',
+        matrixSet: 'EPSG:3857',
+        attributions: [
+        '<a href="http://scalgo.com">SCALGO</a>',
+        '<a href="http://www.cgiar-csi.org/data/' +
+        'srtm-90m-digital-elevation-database-v4-1">CGIAR-CSI SRTM</a>'
+        ],
+        tileGrid: tileGrid,
+        style: 'default',
+        dimensions: {
+          'threshold': 100
+        }
+      });
+      var gmap_satellite_layer = new ol.layer.Tile({
+        title: "仅卫星图",
+        source: new ol.source.XYZ({
+          url: 'https://mt1.google.cn/maps/vt?lyrs=s%40721&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}'
+        })
+      });
+      var sealevelLayer = new ol.layer.Tile({
+        opacity: 0.5,
+        source: wmtsSource
+      });
+
+      var hangzhou = ol.proj.transform([120.18, 30.26], 'EPSG:4326', 'EPSG:3857');
+      var map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: hangzhou,
+          zoom: 10,
+          minZoom: 4,
+          maxZoom: 18
+        }),
+        layers: [gmap_satellite_layer,sealevelLayer]
+      });
+
+      var updateSourceDimension = function(source, sliderVal) {
+        source.updateDimensions({'threshold': sliderVal});
+        document.getElementById('theinfo').innerHTML = sliderVal + ' meters';
+      };
+
+      updateSourceDimension(wmtsSource, 10);
+
+      document.getElementById('slider').addEventListener('input', function() {
+        updateSourceDimension(wmtsSource, this.value);
+      });
+    </script>
+  </body>
+  </html>
