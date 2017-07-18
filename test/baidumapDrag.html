@@ -1,0 +1,36 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{height:100%}  
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A4749739227af1618f7b0d1b588c0e85"></script>
+</script>
+</head>  
+ 
+<body>  
+<div id="container"></div> 
+<script type="text/javascript"> 
+var map = new BMap.Map("container");          // 创建地图实例  
+var point = new BMap.Point(116.404, 39.915);  // 创建点坐标  
+map.centerAndZoom(point, 15);    
+
+map.addEventListener("dragend", function(){    
+ var center = map.getCenter();    
+ // alert("地图中心点变更为：" + center.lng + ", " + center.lat);   
+ marker.setPosition(new BMap.Point(center.lng, center.lat)) ;
+});
+var icon = new BMap.Icon("https://lxqjss.github.io/img/GeoprocessingTool48.png",new BMap.Size(32,32));
+		var marker = new BMap.Marker(point,{"icon":icon});
+		map.addOverlay(marker);
+		map.enableScrollWheelZoom(true);
+		map.addControl(new BMap.NavigationControl());
+
+</script>  
+</body>  
+</html>
