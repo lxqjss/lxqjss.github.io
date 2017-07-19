@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<title>googleMap</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+   <meta http-equiv="Content-Type" content ="text/html" charset="UTF-8"/>
+	 <link rel="icon" href="../img/dt.ico" type="../image/x-icon" />
+	<link rel="shortcut icon" href="../img/dt.ico" type="../image/x-icon" />
+	<link rel="stylesheet" href="../css/ol.css" type="text/css" />
+</head>
+<style type="text/css">
+	html, body {
+	overflow: hidden;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+<body>
+	<!--[if lt IE 9]>
+    <div class="text-center text-warning">请使用Chrome、Firefox等主流浏览器访问!</div>
+    <![endif]-->
+	<div id="map"  style="height:100%;width: 100%" class="map"></div>
+	<script src="../js/ol.js"></script>
+	<script>
+    var hangzhou = ol.proj.transform([120.08, 30.307222], 'EPSG:4326', 'EPSG:3857');
+    var view = new ol.View({
+    	center: hangzhou,
+    	zoom: 6
+    });
+ var nightlight = new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+          url: 'http://60.191.115.34:8080/geoserver/night/wms',
+          params: {
+          'FORMAT': "image/jpeg", 
+          'VERSION': '1.1.1',
+          tiled: true,
+          STYLES: '',
+          LAYERS: 'night:dnb_land_ocean_ice',
+        }
+      })
+      });
+ var gaodeMap_anno = new ol.layer.Tile({  
+  title: "高德地图注记",
+  source: new ol.source.XYZ({  
+    urls: [
+    "https://webst01.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+    "https://webst02.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+    "https://webst03.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+    "https://webst04.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+    ]
+  }),  
+  projection: 'EPSG:3857'  
+}); 
+    var map = new ol.Map({
+     target: 'map',
+        layers: [nightlight,gaodeMap_anno],
+        view: view,
+        logo: false
+      });
+    </script>
+  </body>
+  </html>
