@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WKT</title>
+  <title>wkt-wfs</title>
   <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
   <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -14,6 +14,21 @@
   <script>
     var raster = new ol.layer.Tile({
       source: new ol.source.OSM()
+    });
+    var tianditu_layer = new ol.layer.Tile({
+      title: "天地图",
+      source: new ol.source.XYZ({
+        url: "http://t4.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+      }),
+      projection: 'EPSG:4490'  
+    });
+
+    var tianditu_anno= new ol.layer.Tile({
+      title: "天地图注记",
+      source: new ol.source.XYZ({
+        url: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}'
+      }),
+      projection: 'EPSG:4490'  
     });
     var gmap_satellite_layer_anno= new ol.layer.Tile({
       title: "卫星图带文字",
@@ -28,32 +43,38 @@
       projection: 'EPSG:3857'  
     });  
 
-      // var wkt = 'POLYGON((10.689 -25.092, 34.595 ' +
-      //     '-20.170, 38.814 -35.639, 13.502 ' +
-      //     '-39.155, 10.689 -25.092))';
 
   //天水街道测试
   // var wkt = 'POLYGON((-180 -90, -180 90, 180 90, 180 -90, -180 -90)'+
   //   ',(120.1545 30.2727,120.1574 30.2631,120.1712 30.2647,'+
   //   '120.1705 30.2746,120.1663 30.2748,120.1621 30.2743,'+
   //   '120.1622 30.2734,120.1545 30.2727))';
-
-
-  var wkt; 
   $.ajax({
     type: "GET",
-    url: "https://lxqjss.github.io/data/yuhangwkt.txt",
-    dataType: "text",
     async: false,
-    scriptCharset: 'utf-8',
+    url: "http://192.168.71.49:8888/geoserver/wfs",
+    data: {
+      'service': 'WFS',
+      'version': '1.0.0',
+      'request': 'GetFeature',
+      'typeName': 'hesc:tianshuiouter',
+      'outputFormat': 'application/json'
+    },
     success: function (data) {
-      wkt = 'POLYGON((-180 -90, -180 90, 180 90, 180 -90, -180 -90),('+data+'))';
+      var innerPolygon="";
+      var coordinates = data.features[0].geometry.coordinates[0];
+      for(var i = 0;i < coordinates.length;i++){
+        var coordinate = coordinates[i][0]+' '+coordinates[i][1];
+        innerPolygon+= coordinate;
+        if(i!= coordinates.length-1)
+          innerPolygon+=",";
+      }
+      wkt = 'POLYGON((-180 -90, -180 90, 180 90, 180 -90, -180 -90),('+innerPolygon+'))';
     },
     error:function(){
-     console.log("读取文件错误");
+     console.log("请求geoserver出现错误");
    }
  });
-
   var format = new ol.format.WKT();
 
   var feature = format.readFeature(wkt, {
@@ -87,13 +108,13 @@
   })  
 });  
   vector.setStyle(style);
-  var hangzhou = ol.proj.transform([120.18, 30.26], 'EPSG:4326', 'EPSG:3857');
+  var hangzhou = ol.proj.transform([120.16, 30.273], 'EPSG:4326', 'EPSG:3857');
   var map = new ol.Map({
-    layers: [gaodeMapLayer, vector],
+    layers: [tianditu_layer,tianditu_anno, vector],
     target: 'map',
     view: new ol.View({
       center: hangzhou,
-      zoom: 10,
+      zoom: 15,
       minZoom: 4,
       maxZoom: 18,
     })
