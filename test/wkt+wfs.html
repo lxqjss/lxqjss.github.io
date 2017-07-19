@@ -18,7 +18,7 @@
     var tianditu_layer = new ol.layer.Tile({
       title: "天地图",
       source: new ol.source.XYZ({
-        url: "http://t4.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+        url: "https://t4.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
       }),
       projection: 'EPSG:4490'  
     });
@@ -26,7 +26,7 @@
     var tianditu_anno= new ol.layer.Tile({
       title: "天地图注记",
       source: new ol.source.XYZ({
-        url: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}'
+        url: 'https://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}'
       }),
       projection: 'EPSG:4490'  
     });
@@ -52,12 +52,12 @@
   $.ajax({
     type: "GET",
     async: false,
-    url: "http://192.168.71.49:8888/geoserver/wfs",
+    url: "http://60.191.115.34:8080/geoserver/wfs",
     data: {
       'service': 'WFS',
       'version': '1.0.0',
       'request': 'GetFeature',
-      'typeName': 'hesc:tianshuiouter',
+      'typeName': 'hescgis:tianshuiouter',
       'outputFormat': 'application/json'
     },
     success: function (data) {
