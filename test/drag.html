@@ -177,7 +177,7 @@ var vectorLayer = new ol.layer.Vector({
   }),
   style: new ol.style.Style({
     image: new ol.style.Icon(({
-      src: '../img/loc.png'
+      src: '../img/mark-1.png'
     }))
   })
 })
@@ -188,7 +188,10 @@ var map = new ol.Map({
   view: view,
   logo: false
 });
-
+map.on('moveend', onMoveEnd);
+function onMoveEnd(){
+  pointFeature.setGeometry(new ol.geom.Point(map.getView().getCenter()));
+}
 </script>
 </body>
 </html>
