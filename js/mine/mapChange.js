@@ -50,7 +50,7 @@ function satelliteFunction(){
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
 		}else if($('#RadiosNight').is(':checked')){
-			map.addLayer(nightLayers);
+			map.addLayer(tilednight);
 		}
 		map.addLayer(gmap_anno);
 		map.addLayer(locationLayer);
@@ -58,7 +58,7 @@ function satelliteFunction(){
 		if($('#RadiosNormal').is(':checked')){
 			map.addLayer(gmap_satellite_layer);
 		}else if($('#RadiosNight').is(':checked')){
-			map.addLayer(nightLayers);
+			map.addLayer(tilednight);
 		}
 		map.addLayer(locationLayer);
 	}

@@ -245,15 +245,15 @@ stroke: new ol.style.Stroke({
   }
 })
 });
- var tiled = new ol.layer.Tile({
+ var tilednight = new ol.layer.Tile({
         // visible: false,
         source: new ol.source.TileWMS({
-          url: 'http://60.191.115.34:8080/geoserver/night/wms',
+          url: 'http://localhost:8888/geoserver/hesc/wms',
           params: {'FORMAT': format, 
           'VERSION': '1.1.1',
           tiled: true,
           STYLES: '',
-          LAYERS: 'night:dnb_land_ocean_ice',
+          LAYERS: 'hesc:nightlight',
         }
       })
       });
