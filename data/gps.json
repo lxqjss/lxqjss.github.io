@@ -1,18 +1,19 @@
-{"code":"1","msg":"查 询 成 功 ","obj":[{"gpsTime":1501809791000,"coordinateY":"30.281384" 
-       ,"coordinateX":"120.106844"},{"gpsTime":1501809794000,"coordinateY":"30.291384" 
+{"code":"1","msg":"查 询 成 功 ","obj":[
+	
+{"gpsTime":1501809791000,"coordinateY":"30.281384","coordinateX":"120.106844"},
+{"gpsTime":1501809794000,"coordinateY":"30.291384","coordinateX":"120.106854"},
+{"gpsTime":1501809797000,"coordinateY":"30.201384","coordinateX":"120.106884"},
+{"gpsTime":1501809799000,"coordinateY":"30.211384","coordinateX":"120.106894"},
+{"gpsTime":1501809804000,"coordinateY":"30.291384","coordinateX":"120.107844"},
+{"gpsTime":1501809807000,"coordinateY":"30.201384","coordinateX":"120.110000"},
+{"gpsTime":1501809808000,"coordinateY":"30.211384","coordinateX":"120.116844"}
 
-       ,"coordinateX":"120.226844"},
-{"gpsTime":1501809797000,"coordinateY":"30.201384" 
+{"gpsTime":1501812000000,"coordinateY":"30.281384","coordinateX":"120.116844"},
+{"gpsTime":1501815600000,"coordinateY":"30.291384","coordinateX":"120.126854"},
+{"gpsTime":1501819200000,"coordinateY":"30.201384","coordinateX":"120.126084"},
+{"gpsTime":1501822800000,"coordinateY":"30.211384","coordinateX":"120.120894"},
+{"gpsTime":1501826400000,"coordinateY":"30.291384","coordinateX":"120.137844"},
+{"gpsTime":1501830000000,"coordinateY":"30.201384","coordinateX":"120.130000"},
+{"gpsTime":1501839808000,"coordinateY":"30.211384","coordinateX":"120.136844"}
 
-       ,"coordinateX":"120.136844"},
-{"gpsTime":1501809799000,"coordinateY":"30.211384" 
-
-       ,"coordinateX":"120.156844"},{"gpsTime":1501809804000,"coordinateY":"30.291384" 
-
-       ,"coordinateX":"120.026844"},
-{"gpsTime":1501809807000,"coordinateY":"30.201384" 
-
-       ,"coordinateX":"120.11"},
-{"gpsTime":1501809808000,"coordinateY":"30.211384" 
-
-       ,"coordinateX":"120.116844"}]} 
+]} 
