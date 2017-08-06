@@ -1,19 +1,19 @@
 {"code":"1","msg":"查 询 成 功 ","obj":[
 	
-{"gpsTime":1502067600000,"coordinateY":"30.281384","coordinateX":"120.106844"},
-{"gpsTime":1502069400000,"coordinateY":"30.281384","coordinateX":"120.116854"},
-{"gpsTime":1502071200000,"coordinateY":"30.281384","coordinateX":"120.126884"},
-{"gpsTime":1502073000000,"coordinateY":"30.281384","coordinateX":"120.136894"},
-{"gpsTime":1502074800000,"coordinateY":"30.281384","coordinateX":"120.147844"},
-{"gpsTime":1502076600000,"coordinateY":"30.281384","coordinateX":"120.150000"},
-{"gpsTime":1502078400000,"coordinateY":"30.281384","coordinateX":"120.166844"},
+{"gpsTime":1501809791000,"coordinateY":"30.281384","coordinateX":"120.106844"},
+{"gpsTime":1501809794000,"coordinateY":"30.281384","coordinateX":"120.116854"},
+{"gpsTime":1501809797000,"coordinateY":"30.281384","coordinateX":"120.126884"},
+{"gpsTime":1501809799000,"coordinateY":"30.281384","coordinateX":"120.136894"},
+{"gpsTime":1501809804000,"coordinateY":"30.281384","coordinateX":"120.147844"},
+{"gpsTime":1501809807000,"coordinateY":"30.281384","coordinateX":"120.150000"},
+{"gpsTime":1501809808000,"coordinateY":"30.281384","coordinateX":"120.166844"},
 
-{"gpsTime":1502082000000,"coordinateY":"30.271384","coordinateX":"120.166844"},
-{"gpsTime":1502083800000,"coordinateY":"30.261384","coordinateX":"120.166844"},
-{"gpsTime":1502085600000,"coordinateY":"30.252384","coordinateX":"120.166844"},
-{"gpsTime":1502087400000,"coordinateY":"30.242384","coordinateX":"120.166844"},
-{"gpsTime":1502089200000,"coordinateY":"30.230384","coordinateX":"120.166844"},
-{"gpsTime":1502091000000,"coordinateY":"30.225384","coordinateX":"120.166844"},
-{"gpsTime":1502092800000,"coordinateY":"30.215384","coordinateX":"120.166844"}
+{"gpsTime":1501809809000,"coordinateY":"30.271384","coordinateX":"120.166844"},
+{"gpsTime":1501809820000,"coordinateY":"30.261384","coordinateX":"120.166844"},
+{"gpsTime":1501809833000,"coordinateY":"30.252384","coordinateX":"120.166844"},
+{"gpsTime":1501809848000,"coordinateY":"30.242384","coordinateX":"120.166844"},
+{"gpsTime":1501809853000,"coordinateY":"30.230384","coordinateX":"120.166844"},
+{"gpsTime":1501809858000,"coordinateY":"30.225384","coordinateX":"120.166844"},
+{"gpsTime":1501809868000,"coordinateY":"30.215384","coordinateX":"120.166844"}
 
 ]} 
