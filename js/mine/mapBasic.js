@@ -248,7 +248,7 @@ stroke: new ol.style.Stroke({
  var tilednight = new ol.layer.Tile({
         // visible: false,
         source: new ol.source.TileWMS({
-          url: 'http://localhost:8888/geoserver/hesc/wms',
+          url: 'http://106.15.231.23:8888/geoserver/hesc/wms',
           params: {'FORMAT': format, 
           'VERSION': '1.1.1',
           tiled: true,
