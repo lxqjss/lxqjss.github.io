@@ -9,8 +9,16 @@
   <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
+<style type="text/css">
+  html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
 <body>
-  <div id="map" class="map"></div>
+  <div id="map" class="map" style="height:100%;width: 100%"></div>
   <script>
     var raster = new ol.layer.Tile({
       source: new ol.source.OSM()
@@ -110,11 +118,12 @@
   vector.setStyle(style);
   var hangzhou = ol.proj.transform([120.16, 30.273], 'EPSG:4326', 'EPSG:3857');
   var map = new ol.Map({
+    controls: [],
     layers: [tianditu_layer,tianditu_anno, vector],
     target: 'map',
     view: new ol.View({
       center: hangzhou,
-      zoom: 15,
+      zoom: 17,
       minZoom: 4,
       maxZoom: 18,
     })
