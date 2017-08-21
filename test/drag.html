@@ -12,11 +12,11 @@
 </head>
 <style type="text/css">
   html, body {
-  overflow: hidden;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 </style>
 <body>
 
@@ -172,15 +172,29 @@ var pointFeature = new ol.Feature({
 });
 
 var vectorLayer = new ol.layer.Vector({
-  source: new ol.source.Vector({
-    features: [pointFeature]
-  }),
-  style: new ol.style.Style({
-    image: new ol.style.Icon(({
-      src: '../img/mark-1.png'
-    }))
-  })
-})
+  source: new ol.source.Vector()
+  // source: new ol.source.Vector({
+  //   features: [pointFeature]
+  // }),
+  // style: new ol.style.Style({
+  //   image: new ol.style.Icon(({
+  //     src: '../img/mark-1.png'
+  //   })),
+  //    text: new ol.style.Text({
+  //     // font: '10px sans-serif' 默认这个字体，可以修改成其他的，格式和css的字体设置一样
+  //     text: '杭州市西湖区华星路创业大厦',
+  //     fill: new ol.style.Fill({
+  //         color: 'red'
+  //     })
+  //   })
+  // })
+});
+
+
+var mousePosition=new ol.control.MousePosition({
+  coordinateFormat: ol.coordinate.createStringXY(6),//显示6位小数点
+  projection: 'EPSG:4326'
+});   
 var map = new ol.Map({
   interactions: ol.interaction.defaults().extend([new app.Drag()]),
   target: 'map',
@@ -188,10 +202,31 @@ var map = new ol.Map({
   view: view,
   logo: false
 });
-map.on('moveend', onMoveEnd);
-function onMoveEnd(){
-  pointFeature.setGeometry(new ol.geom.Point(map.getView().getCenter()));
-}
+
+  // 应用style function，动态的获取样式
+  // zoom大于10级后显示文字，且随放大级别而放大字体
+  pointFeature.setStyle(function(resolution){
+    return [new ol.style.Style({
+     image: new ol.style.Icon(({
+       src: '../img/mark-1.png'})),
+
+     text: new ol.style.Text({
+      text: '请尝试拖动图标',
+      fill: new ol.style.Fill({
+        color: 'red'
+      }),
+      scale: map.getView().getZoom()>10?map.getView().getZoom()/10:0
+    })
+   })];
+  });
+
+  vectorLayer.getSource().addFeature(pointFeature);
+
+  map.addControl(mousePosition);
+  map.on('moveend', onMoveEnd);
+  function onMoveEnd(){
+    pointFeature.setGeometry(new ol.geom.Point(map.getView().getCenter()));
+  }
 </script>
 </body>
 </html>
