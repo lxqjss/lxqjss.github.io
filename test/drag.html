@@ -156,38 +156,41 @@
 var hangzhou = ol.proj.transform([120.08, 30.307222], 'EPSG:4326', 'EPSG:3857');
 var view = new ol.View({
   center: hangzhou,
-  zoom: 9
+  zoom: 8,
+  minZoom: 4,
+  maxZoom: 18,
 });
-
 
 var gmap_satellite_layer = new ol.layer.Tile({
   title: "仅卫星图",
   source: new ol.source.XYZ({
+    wrapX: false ,
     url: 'https://mt1.google.cn/maps/vt?lyrs=s%40721&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}'
   })
 });
+var tianditu_layer = new ol.layer.Tile({
+  title: "天地图",
+  source: new ol.source.XYZ({
+    url: "http://t4.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+  }),
+  projection: 'EPSG:4490'  
+});
 
+var tianditu_anno= new ol.layer.Tile({
+  title: "天地图注记",
+  source: new ol.source.XYZ({
+    url: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}'
+  }),
+  projection: 'EPSG:4490'  
+});
 var pointFeature = new ol.Feature({  
  geometry:new ol.geom.Point(ol.proj.fromLonLat([120.08, 30.307222]))
 });
 
 var vectorLayer = new ol.layer.Vector({
-  source: new ol.source.Vector()
-  // source: new ol.source.Vector({
-  //   features: [pointFeature]
-  // }),
-  // style: new ol.style.Style({
-  //   image: new ol.style.Icon(({
-  //     src: '../img/mark-1.png'
-  //   })),
-  //    text: new ol.style.Text({
-  //     // font: '10px sans-serif' 默认这个字体，可以修改成其他的，格式和css的字体设置一样
-  //     text: '杭州市西湖区华星路创业大厦',
-  //     fill: new ol.style.Fill({
-  //         color: 'red'
-  //     })
-  //   })
-  // })
+  source: new ol.source.Vector({
+    wrapX: false 
+  })
 });
 
 
@@ -198,7 +201,7 @@ var mousePosition=new ol.control.MousePosition({
 var map = new ol.Map({
   interactions: ol.interaction.defaults().extend([new app.Drag()]),
   target: 'map',
-  layers: [gmap_satellite_layer,vectorLayer],
+  layers: [tianditu_layer,tianditu_anno,vectorLayer],
   view: view,
   logo: false
 });

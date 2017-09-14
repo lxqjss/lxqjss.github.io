@@ -237,18 +237,18 @@ stroke: new ol.style.Stroke({
  var untiled = new ol.layer.Image({
   source: new ol.source.ImageWMS({
     ratio: 1,
-    url: 'http://60.191.115.34:8080/geoserver/night/wms',
+    url: 'http://42.123.127.101:8888/geoserver/hesc/wms',
     params: {'FORMAT': format,
     'VERSION': '1.1.1',  
     STYLES: '',
-    LAYERS: 'night:dnb_land_ocean_ice',
+    LAYERS: 'hesc:nightlight',
   }
 })
 });
  var tilednight = new ol.layer.Tile({
         // visible: false,
         source: new ol.source.TileWMS({
-          url: 'http://106.15.231.23:8888/geoserver/hesc/wms',
+          url: 'http://42.123.127.101:8888/geoserver/hesc/wms',
           params: {'FORMAT': format, 
           'VERSION': '1.1.1',
           tiled: true,

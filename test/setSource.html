@@ -34,6 +34,7 @@
       url: 'https://mt1.google.cn/maps/vt?lyrs=s%40721&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}'
     });
     var rasterSource = new ol.source.Stamen({
+      wrapX: false ,
       layer: 'toner'
     });
     baseTileLayer.setSource(rasterSource);
