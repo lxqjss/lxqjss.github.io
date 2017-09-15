@@ -63,7 +63,7 @@ function onComplete(data) {
   addlocationico(Number(gaodeX),Number(gaodeY));
 }
 function onError(data) {
-	console.log("error");
+	console.log("未能获取到高德定位信息");
 }
 /**
  * 添加所在位置坐标点
