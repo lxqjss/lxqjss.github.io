@@ -22,7 +22,8 @@ var lxqjssKey="fe7500f9bcdab914ed3d65664b287e43";//高德key
 /**
  * 采用高德精准定位方式
  */
-var locationLayer;
+var locationLayer = new ol.layer.Vector();  //初始未设置source
+map.addLayer(locationLayer);
 var gaodeX = 0;
 var gaodeY = 0;
 $('body').append('<div id="gaodemap" style="display: none;"></div> ');
@@ -83,10 +84,11 @@ function addlocationico(locationX,locationY){
    var source = new ol.source.Vector({  
     features:[locationFeatrue]  
 	});  
-   locationLayer = new ol.layer.Vector({  
-       source: source  
-	});  
-   map.addLayer(locationLayer);
+ //   locationLayer = new ol.layer.Vector({  
+ //       source: source  
+	// });  
+   // map.addLayer(locationLayer);
+   locationLayer.setSource(source);//动态设置source
 }
 var os = function() {  
      var ua = navigator.userAgent,  
