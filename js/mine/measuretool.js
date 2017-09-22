@@ -1,26 +1,17 @@
-/**
- * OpenLayers 3 MeasureTool Control.
- * See [the examples](./examples) for usage.
- * @constructor
- * @extends {ol.control.Control}
- * @param {Object} opt_options Control options, extends olx.control.ControlOptions adding:
- *                              **`tipLabel`** `String` - the button tooltip.
- */
 ol.control.MeasureTool = function(opt_options) {
 
   var options = opt_options || {};
+
 
   this.sphereradius = options.sphereradius ?
     options.sphereradius : 6378137;
 
   this.mapListeners = [];
 
-  // hiddenclass
   this.hiddenClassName = 'ol-control MeasureTool';
   if (ol.control.MeasureTool.isTouchDevice_()) {
       this.hiddenClassName += ' touch';
   }
-  // shownClass
   this.shownClassName = this.hiddenClassName + ' shown';
 
   var element = document.createElement('div');
@@ -47,23 +38,12 @@ ol.control.MeasureTool = function(opt_options) {
     title:"测距",
     source: this.source,
     style: new ol.style.Style({
-      fill: new ol.style.Fill({
-        color: 'rgba(255, 255, 255, 0.2)'
-      }),
       stroke: new ol.style.Stroke({
         color: '#ffcc33',
-        width: 2
-      }),
-      image: new ol.style.Circle({
-        radius: 7,
-        fill: new ol.style.Fill({
-          color: '#ffcc33'
-        })
+        width: 3
       })
     })
   });
-  // var vector = this.vector;
-  //  map.addLayer(vector);
 
   this_.panel.onmouseout = function(e) {
       e = e || window.event;
@@ -89,17 +69,19 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
   var helpTooltipElement;
   var measureTooltipElement;
   var measureTooltip;
+  var currentFeature;
 
   var map = this.getMap();
   
-  for(var i=0;i<map.getLayers().array_.length;i++){
-  if(map.getLayers().getArray()[i].values_.title=='测距')
-    containsVector=true;
-  }
- if(!containsVector){
-
+ //  for(var i=0;i<map.getLayers().array_.length;i++){
+ //  if(map.getLayers().getArray()[i].values_.title=='测距')
+ //    containsVector=true;
+ //  }
+ // if(!containsVector){
+//待优化
+  map.removeLayer(vector);
   map.addLayer(vector);
- }
+ // }
 
   map.getViewport().addEventListener('mouseout', function() {
     helpTooltipElement.classList.add('hidden');
@@ -227,9 +209,10 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
       }, this);
 
     draw.on('drawend',
-        function() {
+        function(e) {
           measureTooltipElement.appendChild(popupcloser);
           measureTooltipElement.className = 'tooltip tooltip-static';
+          currentFeature = e.feature;
           measureTooltip.setOffset([0, -7]);
           // unset sketch
           sketch = null;
@@ -264,11 +247,12 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
     map.addOverlay(measureTooltip);
   }
 
-  //clear
+  //清除标注及线段
   popupcloser.onclick = function(e) {
-    map.getOverlays().clear();
-    vector.getSource().clear();
-    // map.removeLayer(vector);
+    // map.getOverlays().clear();//全部清空
+    // vector.getSource().clear();
+    vector.getSource().removeFeature(currentFeature);
+    $(e.currentTarget.offsetParent.offsetParent).remove();
   };
 
   addInteraction();
