@@ -38,7 +38,6 @@
     color: red;
 }
 .ol-popup-closer:after {
-   /* content: "✖";*/
     content: "X";
 }
 /*MeasureTool*/
@@ -70,8 +69,9 @@
   text-align: center;
 }
 .MeasureTool>ul>li>input{
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABiUlEQVRIS8WUQU7CQBSG/ze6lxsoJxCPYMpePIG4almJW2giJq1xJ6ykbuAG6p6GIwgnkBsYtwb7zGsZLKUk0tI4m6btzP/N/+bNTyh4UMH6+D+A7fkdACwOHdO4TTq1vVENoGP9PW2O/NvowPb8UDwafO6Y1Zc4xO77ExDigFStvwEYPccymhrQGYxL86/gIw50TCM7gBkz1zLKWrD16NeVwgCMqXaRGcDgTwIdzANVvm+czgTS9kZDAl0AkLO5WZxTNgfM/EpEZwxcu6bRjQD+jIDDgNSJ4uAtFyAIcCnlEJBrVWutp3FFRMWZa1ZLuhkyl0hKs6+Cd73Ltuc3CXjQwNwA2ZkuibQrM+pSMnF21zCGOwHYfb8LwhUYPSauxw99N4Do1j7/3jtMHcuoyHsegESFxET4lN7Hnpoo/j6Kvkc3exEpy3nJSCk+7OKhtinYton0pB6thlooFZYkx1hZnwbIob2+NA2wlv1bEsNs0kMAK5Z012wpupye1Cu+i7Lu9K/rCnfwA90A1i8VnCB2AAAAAElFTkSuQmCC') /*logo.png*/;
-  background-position: center center;
+  /*background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABiUlEQVRIS8WUQU7CQBSG/ze6lxsoJxCPYMpePIG4almJW2giJq1xJ6ykbuAG6p6GIwgnkBsYtwb7zGsZLKUk0tI4m6btzP/N/+bNTyh4UMH6+D+A7fkdACwOHdO4TTq1vVENoGP9PW2O/NvowPb8UDwafO6Y1Zc4xO77ExDigFStvwEYPccymhrQGYxL86/gIw50TCM7gBkz1zLKWrD16NeVwgCMqXaRGcDgTwIdzANVvm+czgTS9kZDAl0AkLO5WZxTNgfM/EpEZwxcu6bRjQD+jIDDgNSJ4uAtFyAIcCnlEJBrVWutp3FFRMWZa1ZLuhkyl0hKs6+Cd73Ltuc3CXjQwNwA2ZkuibQrM+pSMnF21zCGOwHYfb8LwhUYPSauxw99N4Do1j7/3jtMHcuoyHsegESFxET4lN7Hnpoo/j6Kvkc3exEpy3nJSCk+7OKhtinYton0pB6thlooFZYkx1hZnwbIob2+NA2wlv1bEsNs0kMAK5Z012wpupye1Cu+i7Lu9K/rCnfwA90A1i8VnCB2AAAAAElFTkSuQmCC') *//*logo.png*/;
+  background-image: url('../img/measure.png');
+  background-position: center 2px;
   background-repeat: no-repeat;
 }
 .MeasureTool input[type="button"]{
