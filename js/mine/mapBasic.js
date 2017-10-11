@@ -300,7 +300,18 @@ map.addControl(zoomToExtent);
 map.addControl(mousePosition);
 map.addControl(MeasureTool);
 
-
+//屏蔽鼠标右键
+document.oncontextmenu = function() {
+  return false;
+};
+$("#map").mousedown(function(e) {
+  console.log(e.which);
+  if (3 == e.which) {//右键为3
+     console.log("右击事件!!!!"); 
+     // draw.finishDrawing();//测试右击后结束测量
+  } 
+});
+  
 // loadXZQHVectorSource();
 
 //用于坐标转换测试 存在错误 var gcj02towgs84=gcj02towgs84(coordinate[0], coordinate[1]);

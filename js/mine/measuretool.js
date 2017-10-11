@@ -27,17 +27,14 @@ ol.control.MeasureTool = function(opt_options) {
   inputMeasure.type = "button";
   ulheader.appendChild(inputMeasure);
   var this_ = this;
-  var typeSelect={};
-  inputMeasure.onclick = function(e) {
-     typeSelect.value = 'length';
-    typeSelect.check = true;
-    this_.mapmeasure(typeSelect);
+  inputMeasure.onclick = function(e) {//开始测量
+    this_.mapmeasure();
   };
   this.source = new ol.source.Vector();
   this.vector = new ol.layer.Vector({
     title:"测距",
     source: this.source,
-    style: new ol.style.Style({
+    style: new ol.style.Style({//测距完成后线段样式
       stroke: new ol.style.Stroke({
         color: '#ffcc33',
         width: 3
@@ -60,7 +57,27 @@ ol.control.MeasureTool = function(opt_options) {
 
 ol.inherits(ol.control.MeasureTool, ol.control.Control);
 
-ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
+/**
+ * Set the map instance the control is associated with.
+ * @param {ol.Map} map The map instance.
+ */
+ol.control.MeasureTool.prototype.setMap = function(map) {
+    // Clean up listeners associated with the previous map
+    for (var i = 0, key; i < this.mapListeners.length; i++) {
+        this.getMap().unByKey(this.mapListeners[i]);
+    }
+    this.mapListeners.length = 0;
+    // Wire up listeners etc. and store reference to new map
+    ol.control.Control.prototype.setMap.call(this, map);
+    if (map) {
+        var this_ = this;
+        this.mapListeners.push(map.on('pointerdown', function() {
+            this_.hidePanel();
+        }));
+    }
+};
+
+ol.control.MeasureTool.prototype.mapmeasure = function() {
   var source = this.source;
   var vector = this.vector;
   var wgs84Sphere = new ol.Sphere(this.sphereradius);
@@ -73,16 +90,10 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
 
   var map = this.getMap();
   
- //  for(var i=0;i<map.getLayers().array_.length;i++){
- //  if(map.getLayers().getArray()[i].values_.title=='测距')
- //    containsVector=true;
- //  }
- // if(!containsVector){
-//待优化
+
+
   map.removeLayer(vector);
   map.addLayer(vector);
- // }
-
   map.getViewport().addEventListener('mouseout', function() {
     helpTooltipElement.classList.add('hidden');
   });
@@ -91,21 +102,13 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
 
   var formatLength = function(line) {
     var length;
-    if (typeSelect.check) {
-      var coordinates = line.getCoordinates();
-      length = 0;
-      var sourceProj = map.getView().getProjection();
-      for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
-        var c1 = ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
-        var c2 = ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
-        length += wgs84Sphere.haversineDistance(c1, c2);
-      }
-    } else {
-      var sourceProj = map.getView().getProjection();
-      var geom = /** @type {ol.geom.Polygon} */(line.clone().transform(
-          sourceProj, 'EPSG:3857'));
-      length = Math.round(geom.getLength() * 100) / 100;
-      // length = Math.round(line.getLength() * 100) / 100;
+    var coordinates = line.getCoordinates();
+    length = 0;
+    var sourceProj = map.getView().getProjection();
+    for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
+      var c1 = ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
+      var c2 = ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
+      length += wgs84Sphere.haversineDistance(c1, c2);
     }
     var output;
     if (length > 100) {
@@ -118,41 +121,16 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
     return output;
   };
 
-  var formatArea = function(polygon) {
-    if (typeSelect.check) {
-      var sourceProj = map.getView().getProjection();
-      var geom = /** @type {ol.geom.Polygon} */(polygon.clone().transform(
-          sourceProj, 'EPSG:4326'));
-      var coordinates = geom.getLinearRing(0).getCoordinates();
-      area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
-    } else {
-      var sourceProj = map.getView().getProjection();
-      var geom = /** @type {ol.geom.Polygon} */(polygon.clone().transform(
-          sourceProj, 'EPSG:3857'));
-      area = geom.getArea();
-      // area = polygon.getArea();
-    }
-    var output;
-    if (area > 10000) {
-      output = (Math.round(area / 1000000 * 100) / 100) +
-          ' ' + 'km<sup>2</sup>';
-    } else {
-      output = (Math.round(area * 100) / 100) +
-          ' ' + 'm<sup>2</sup>';
-    }
-    return output;
-  };
-
+  //删除线段按钮
   var popupcloser = document.createElement('a');
   popupcloser.href = 'javascript:void(0);';
   popupcloser.classList.add('ol-popup-closer');
 
   function addInteraction() {
-    var type = (typeSelect.value == 'area' ? 'Polygon' : 'LineString');
     draw = new ol.interaction.Draw({
       source: source,
-      type: /** @type {ol.geom.GeometryType} */ (type),
-      style: new ol.style.Style({
+      type: /** @type {ol.geom.GeometryType} */"LineString",
+      style: new ol.style.Style({//绘制过程中样式设定
         fill: new ol.style.Fill({
           color: 'rgba(255, 255, 255, 0.2)'
         }),
@@ -162,9 +140,10 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
           width: 2
         }),
         image: new ol.style.Circle({
-          radius: 5,
+          radius: 7,
           stroke: new ol.style.Stroke({
-            color: 'rgba(0, 0, 0, 0.7)'
+            color: 'rgba(0, 0, 0, 0.7)',
+            width: 1.5
           }),
           fill: new ol.style.Fill({
             color: 'rgba(255, 255, 255, 0.2)'
@@ -181,20 +160,14 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
     var count = 0;
     draw.on('drawstart',
       function(evt) {
-        // set sketch
         sketch = evt.feature;
-
-        /** @type {ol.Coordinate|undefined} */
         var tooltipCoord = evt.coordinate;
-
         listener = sketch.getGeometry().on('change', function(evt) {
           try {
             var geom = evt.target;
             var output;
-            if (geom instanceof ol.geom.Polygon) {
-              output = formatArea(geom);
-              tooltipCoord = geom.getInteriorPoint().getCoordinates();
-            } else if (geom instanceof ol.geom.LineString) {
+
+            if (geom instanceof ol.geom.LineString) {
               output = formatLength(geom);
               tooltipCoord = geom.getLastCoordinate();
             }
@@ -214,18 +187,17 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
           measureTooltipElement.className = 'tooltip tooltip-static';
           currentFeature = e.feature;
           measureTooltip.setOffset([0, -7]);
-          // unset sketch
           sketch = null;
-          // unset tooltip so that a new one can be created
           measureTooltipElement = null;
           createMeasureTooltip();
           ol.Observable.unByKey(listener);
-          //end
           map.removeInteraction(draw);
-          // map.getInteractions().item(1).setActive(false);
         }, this);
   }
 
+  /**
+   * 测量帮助信息
+   */
   function createHelpTooltip() {
     if (helpTooltipElement) {
       helpTooltipElement.parentNode.removeChild(helpTooltipElement);
@@ -233,6 +205,10 @@ ol.control.MeasureTool.prototype.mapmeasure = function(typeSelect) {
     helpTooltipElement = document.createElement('div');
     helpTooltipElement.className = 'tooltip hidden';
   }
+
+  /**
+   * 测量提示信息
+   */
   function createMeasureTooltip() {
     if (measureTooltipElement) {
       measureTooltipElement.parentNode.removeChild(measureTooltipElement);
@@ -276,25 +252,7 @@ ol.control.MeasureTool.prototype.hidePanel = function() {
     }
 };
 
-/**
- * Set the map instance the control is associated with.
- * @param {ol.Map} map The map instance.
- */
-ol.control.MeasureTool.prototype.setMap = function(map) {
-    // Clean up listeners associated with the previous map
-    for (var i = 0, key; i < this.mapListeners.length; i++) {
-        this.getMap().unByKey(this.mapListeners[i]);
-    }
-    this.mapListeners.length = 0;
-    // Wire up listeners etc. and store reference to new map
-    ol.control.Control.prototype.setMap.call(this, map);
-    if (map) {
-        var this_ = this;
-        this.mapListeners.push(map.on('pointerdown', function() {
-            this_.hidePanel();
-        }));
-    }
-};
+
 
 /**
  * Generate a UUID
