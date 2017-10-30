@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Draw and Move</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.4.2/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.4.2/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    
+    <script>
+      var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var source = new ol.source.Vector();
+      var vector = new ol.layer.Vector({
+        source: source
+        
+      });
+      var mainStyleFuc = function(resolution){
+      return [new ol.style.Style({
+      image: new ol.style.Icon(({
+       src: '../img/mark-1.png'}))
+    })];
+    };
+      vector.setStyle(mainStyleFuc);
+
+      var map = new ol.Map({
+        layers: [raster, vector],
+        target: 'map',
+        view: new ol.View({
+          center: [-11000000, 4600000],
+          zoom: 4
+        })
+      });
+
+      var modify = new ol.interaction.Modify({source: source,style:mainStyleFuc});
+      map.addInteraction(modify);
+
+      var draw; // global so we can remove them later
+
+      function addInteractions() {
+        draw = new ol.interaction.Draw({
+          source: source,
+          type: "Point",
+          style: mainStyleFuc
+        });
+        map.addInteraction(draw);
+        
+      }
+
+
+      addInteractions();
+      draw.on('drawend', drawEndHandler_, this);
+      function drawEndHandler_(){
+
+        map.removeInteraction(draw);
+      }
+      
+    </script>
+  </body>
+</html>
