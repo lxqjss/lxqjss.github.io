@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>heatMap</title>
+  <link rel="stylesheet" type="text/css"
+        href="https://js.arcgis.com/3.23/esri/css/esri.css"/>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://js.arcgis.com/3.23/init.js"></script>
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+<div id="map"></div>
+</body>
+
+<script>
+  var map;
+  require(["esri/map","esri/renderers/HeatmapRenderer", "dojo/domReady!"], function (Map,HeatmapRenderer) {
+    map = new Map("map", {
+      zoom: 8,
+      // maxZoom: 8,
+      // minZoom: 8,
+      center: [120.243, 29.056],
+      logo: false
+    });
+
+    var tiledUrl = "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer";
+
+    var TiledLayer = new esri.layers.ArcGISTiledMapServiceLayer(tiledUrl);
+
+    map.addLayer(TiledLayer);
+
+    var layerDefinition = {
+      "geometryType": "esriGeometryPoint",
+      "fields": [{
+        "name": "ID",
+        "type": "esriFieldTypeInteger",
+        "alias": "ID"
+      }]
+    }
+    var featureCollection = {
+      layerDefinition: layerDefinition,
+      featureSet: null
+    };
+    //创建FeatureLayer图层
+    var featureLayer = new esri.layers.FeatureLayer(featureCollection, {
+      mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+      outFields: ["*"],
+      opacity: 1
+    });
+
+    var heatmapRenderer = new HeatmapRenderer({
+      colors: ["rgba(255, 0, 0, 0)", "rgb(0, 255, 0)", "rgb(255, 255, 0)", "rgb(255, 0, 0)"],
+      blurRadius: 8,
+      maxPixelIntensity: 230,
+      minPixelIntensity: 10
+    });
+    //设置渲染方式
+    featureLayer.setRenderer(heatmapRenderer);//heatmapRendererhtml中创建的渲染器
+    map.addLayer(featureLayer);
+
+    var heatDataUrl = "https://lxqjss.github.io/data/heatJson.json";
+    $.getJSON(heatDataUrl,{},function(data,textStatus,jqXHR){
+
+      for (var i = 0; i < data.heatData.length; i++) {
+        var x = data.heatData[i].lng;
+        var y = data.heatData[i].lat;
+        var point = new esri.geometry.Point(x, y, new esri.SpatialReference({wkid: 4326}));//初始化起点
+        featureLayer.add(new esri.Graphic(point));
+      }
+
+    });
+
+  });
+</script>
+</html>
