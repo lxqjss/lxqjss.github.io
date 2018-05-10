@@ -30,11 +30,11 @@
       var geoqTiledLayer = new esri.layers.ArcGISTiledMapServiceLayer(geoqtiledUrl);
       map.addLayer(geoqTiledLayer);
 
-      var jiangganOutlineUrl = "http://47.104.78.253:6080/arcgis/rest/services/hangzhou/jiangganoutline/MapServer";
+      var jiangganOutlineUrl = "https://bird.ioliu.cn/v1?url=http://47.104.78.253:6080/arcgis/rest/services/hangzhou/jiangganoutline/MapServer";
       var jiangganOutlineLayer = new ArcGISDynamicMapServiceLayer(jiangganOutlineUrl);
       map.addLayer(jiangganOutlineLayer);
 
-      var jiangganUrl = "http://47.104.78.253:6080/arcgis/rest/services/hangzhou/hangzhouJianggan/MapServer";
+      var jiangganUrl = "https://bird.ioliu.cn/v1?url=http://47.104.78.253:6080/arcgis/rest/services/hangzhou/hangzhouJianggan/MapServer";
       var jiangganLayer = new ArcGISDynamicMapServiceLayer(jiangganUrl);
       map.addLayer(jiangganLayer);
 
