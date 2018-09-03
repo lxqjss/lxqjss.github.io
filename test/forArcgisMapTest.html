@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<title>arcgisMap</title>
+
+   <meta http-equiv="Content-Type" content ="text/html" charset="UTF-8"/>
+
+	<link rel="stylesheet" href="css/ol.css" type="text/css" />
+</head>
+<style type="text/css">
+	html, body {
+	overflow: hidden;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+<body>
+	<!--[if lt IE 9]>
+    <div class="text-center text-warning">请使用Chrome、Firefox等主流浏览器访问!</div>
+    <![endif]-->
+	<div id="map"  style="height:100%;width: 100%" class="map"></div>
+	<script src="js/ol.js"></script>
+	<script>
+      var url = 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/' +
+          'Specialty/ESRI_StateCityHighway_USA/MapServer';
+
+      var layers = [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        }),
+        new ol.layer.Tile({
+          extent: [-13884991, 2870341, -7455066, 6338219],
+          source: new ol.source.TileArcGISRest({
+            url: url
+          })
+        })
+      ];
+      var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        view: new ol.View({
+          center: [-10997148, 4569099],
+          zoom: 4
+        })
+      });
+    </script>
+  </body>
+  </html>

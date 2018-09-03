@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WKT</title>
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+  <div id="map" class="map"></div>
+  <script>
+      /***arcgis地图**/
+      var lanxi_jproad_layer = new ol.layer.Tile({  
+        source: new ol.source.TileArcGISRest({  
+          url:"http://10.10.5.155:6080/arcgis/rest/services/color/shponly1/MapServer"
+        })  
+      });  
+
+      // var wkt = 'POLYGON((120.1545 30.2727,120.1574 30.2631,120.1712 30.2647,'+
+      //     '120.1705 30.2746,120.1663 30.2748,120.1621 30.2743,'+
+      //     '120.1622 30.2734,120.1545 30.2727))';
+      var wkt = 'MULTIPOLYGON(((120.1545 30.2727,120.1574 30.2727,120.1574 30.2647,'+
+          '120.1545 30.2647,120.1545 30.2727),(120.1574 30.2727,120.1674 30.2727,120.1674 30.2647,120.1574 30.2647,120.1574 30.2727)))';
+
+  //天水街道测试
+  // var wkt = 'POLYGON((-180 -90, -180 90, 180 90, 180 -90, -180 -90)'+
+  //   ',(120.1545 30.2727,120.1574 30.2631,120.1712 30.2647,'+
+  //   '120.1705 30.2746,120.1663 30.2748,120.1621 30.2743,'+
+  //   '120.1622 30.2734,120.1545 30.2727))';
+
+
+ //  var wkt; 
+ //  $.ajax({
+ //    type: "GET",
+ //    url: "https://lxqjss.github.io/data/yuhangwkt.txt",
+ //    dataType: "text",
+ //    async: false,
+ //    scriptCharset: 'utf-8',
+ //    success: function (data) {
+ //      wkt = 'POLYGON((-180 -90, -180 90, 180 90, 180 -90, -180 -90),('+data+'))';
+ //    },
+ //    error:function(){
+ //     console.log("读取文件错误");
+ //   }
+ // });
+
+  var format = new ol.format.WKT();
+
+  var feature = format.readFeature(wkt, {
+    dataProjection: 'EPSG:4326',
+    featureProjection: 'EPSG:3857'
+  });
+
+  var vector = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      features: [feature]
+    })
+  });
+  // vector.setOpacity(0.9);
+  var style = new ol.style.Style({  
+  fill: new ol.style.Fill({ //矢量图层填充颜色，以及透明度  
+    // color: 'rgba(0, 0, 0, 0.6)'  
+    color: '#EFE3AD' 
+  }),  
+  stroke: new ol.style.Stroke({ //边界样式  
+    color: 'red',  
+    width: 0.1  
+  }),  
+  text: new ol.style.Text({ //文本样式  
+    font: '12px Calibri,sans-serif',  
+    fill: new ol.style.Fill({  
+      color: '#000'  
+    }),  
+    stroke: new ol.style.Stroke({  
+      color: '#fff',  
+      width: 3  
+    })  
+  })  
+});  
+  vector.setStyle(style);
+  var hangzhou = ol.proj.transform([120.18, 30.26], 'EPSG:4326', 'EPSG:3857');
+  var map = new ol.Map({
+    layers: [lanxi_jproad_layer],
+    controls:[],
+    target: 'map',
+    view: new ol.View({
+      center: [4000,-2000],
+      zoom: 14,
+      minZoom: 13,
+      maxZoom: 20,
+    })
+  });
+//   var mousePosition=new ol.control.MousePosition({
+//   // coordinateFormat: ol.coordinate.createStringXY(6),//显示6位小数点
+//   projection: 'EPSG:3857'
+// });
+// map.addControl(mousePosition);   
+
+</script>
+</body>
+</html>

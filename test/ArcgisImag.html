@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ArcgisImag</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+        var url = 'http://10.10.5.155:6080/arcgis/rest/services/BlackCatService/MapServer';
+        var arcgisimg = new ol.layer.Image({
+                source: new ol.source.ImageArcGISRest({
+            ratio: 1,
+            params: {},
+            url: url
+          })
+        });
+
+      var map = new ol.Map({
+        layers: [
+          arcgisimg
+        ],
+        controls:[],
+        target: 'map',
+        view: new ol.View({
+          center: [2000,-1000],
+          zoom: 15,
+          minZoom: 13,
+          maxZoom: 20,
+        })
+      });
+
+      var mousePosition=new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(6),//显示6位小数点
+        projection: 'EPSG:3857'
+      }) ;
+      map.addControl(mousePosition);
+    </script>
+  </body>
+</html>
