@@ -234,26 +234,26 @@ stroke: new ol.style.Stroke({
  * @type {ol}
  */
  var format = 'image/png';
- var untiled = new ol.layer.Image({
+ var untilednight = new ol.layer.Image({
   source: new ol.source.ImageWMS({
     ratio: 1,
-    url: 'http://42.123.127.101:8888/geoserver/hesc/wms',
+    url: 'http://65.49.210.10:8080/geoserver/hesc/wms',
     params: {'FORMAT': format,
     'VERSION': '1.1.1',  
     STYLES: '',
-    LAYERS: 'hesc:nightlight',
+    LAYERS: 'citydo:nightlight',
   }
 })
 });
  var tilednight = new ol.layer.Tile({
         // visible: false,
         source: new ol.source.TileWMS({
-          url: 'http://42.123.127.101:8888/geoserver/gwc/service/wms',
+          url: 'http://65.49.210.10:8080/geoserver/gwc/service/wms',
           params: {'FORMAT': format, 
           'VERSION': '1.1.1',
           tiled: true,
           STYLES: '',
-          LAYERS: 'hesc:nightlight',
+          LAYERS: 'citydo:nightlight',
         }
       })
       });
