@@ -20,3 +20,7 @@
 
 ### 20170525 更新
 加入高德精准定位服务，获取坐标后初始化标示在地图上
+
+### 20190218 更新 mapbox加载三维模型
+# https://lxqjss.github.io/mapbox/mapboxthreedemo/index.html 
+![](/img/mapboxbuilding.gif)
