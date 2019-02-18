@@ -8,13 +8,13 @@
     "openmaptiles": {
       "type": "vector",
       "tiles": [
-        "http://a.citydo.com.cn/staticMap/tileOpenStreet/{z}/{x}/{y}.pbf"
+        "https://maps.tilehosting.com/data/v3/{z}/{x}/{y}.pbf?key=yzgDrAunRjJjwhG6D3u7"
       ],
       "maxzoom": 14
     }
   },
-  "sprite": "http://a.citydo.com.cn/staticMap/mapbox/sprites/openStreetDarksprite",
-  "glyphs": "http://a.citydo.com.cn/staticMap/mapbox/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://openmaptiles.github.io/dark-matter-gl-style/sprite",
+  "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=hWWfWrAiWGtv68r8wA6D",
   "layers": [
     {
       "id": "background",
